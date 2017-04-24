@@ -1,0 +1,24 @@
+<ion-view class="fundo" drag-content="true" ng-init="carregarAmigos()" cache-view="true">
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <i ng-class="badgeCount > 0 ? 'badge badge-assertive' : 'visibility'" style="position: relative;top: 5px;left: -16px;">
+          {{badgeCount}}</i>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-nav-title>
+    <h1 class="title" style="width: 80%;margin: 0 auto;">Amigos</h1>
+  </ion-nav-title>
+
+  <ion-content>
+      <div collection-repeat="amigo in amigos" class="item-amigos">
+        <div class="amigos">
+          <img ng-src="https://graph.facebook.com/{{amigo.id}}/picture?type=square">
+        <h2 class="truncate">{{amigo.name}}</h2>
+          <button class="button button-balanced" ng-click="amigoFavoritos(amigo)">Favoritos</button>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>

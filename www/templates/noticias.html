@@ -1,0 +1,43 @@
+<ion-view  title="Notícias" class="fundo" ng-init="init()">
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <i ng-class="badgeCount > 0 ? 'badge badge-assertive' : 'visibility'" style="position: relative;top: 5px;left: -16px;">
+          {{badgeCount}}</i>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="has-header" delegate-handle="mainScroll">
+    <ion-list>
+      <div class="center-align" ng-hide="animesJulho.length > 0 && animesOutubro.length > 0" style="margin-top: 10px; position: absolute;left: 40%;right: 40%;">
+        <ion-spinner  icon="android"></ion-spinner>
+      </div>
+      <ion-item class="center-align visibility" ng-style="visibility">
+        <p class="p-grande">Guia temporada: Outubro - 2016</p>
+        <ion-scroll class="scroll_noticias" overflow-scroll="false" direction="x" style="width: 80%;">
+          <div style="display: inline-block;">
+            <div style="display: inline-block;padding: 0px 2px;" ng-repeat="anime in animesOutubro track by $index">
+              <img ui-sref="app.anime({id: anime.id})" height="100px" ng-src="{{anime.imagem}}" alt="{{anime.nome}}">
+              <button class="button button-dark col visibility" ng-style="visibility" ng-click="openModal(anime)" style="line-height: 20px;min-height: 30px;">Sinopse</button>
+            </div>
+          </div>
+        </ion-scroll>
+      </ion-item>
+      <ion-item class="center-align visibility" ng-style="visibility">
+        <p class="p-grande">Guia temporada: Julho - 2016</p>
+        <ion-scroll class="scroll_noticias" overflow-scroll="false" direction="x" style="width: 80%;">
+          <div style="display: inline-block;">
+            <div style="display: inline-block;padding: 0px 2px;" ng-repeat="anime in animesJulho track by $index">
+              <img ui-sref="app.anime({id: anime.id})" height="100px" ng-src="{{anime.imagem}}" alt="{{anime.nome}}">
+              <button class="button button-dark col visibility" ng-style="visibility" ng-click="openModal(anime)" style="line-height: 20px;min-height: 30px;">Sinopse</button>
+            </div>
+          </div>
+        </ion-scroll>
+      </ion-item>
+      <ion-item class="center-align visibility" ng-style="noNoticias">
+        <h1 style="color: #ff4444">Erro ao carregar.</h1>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

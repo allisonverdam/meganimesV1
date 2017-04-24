@@ -1,0 +1,44 @@
+<ion-view delegate-handle="mainScroll" class="row fundo" title="{{titulo}}" drag-content="true" cache-view="true">
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="right">
+      <button id="searchbar" class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()" ng-if="showFilter">
+      </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <i ng-class="badgeCount > 0 ? 'badge badge-assertive' : 'visibility'" style="position: relative;top: 5px;left: -16px;">
+          {{badgeCount}}</i>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="center-align fundo container-fluid has-header">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      ng-if="refresh"
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list class="center-align" style="margin-bottom: 5px; color: #000 !important;">
+      <div id="item_anime item" class="item col col-25" collection-repeat="anime in animes"
+           ui-sref="app.anime({id: anime.id})"
+      item-width="25%">
+        <p>{{anime.nome}}</p>
+        <img ng-src="{{anime.imagem}}" width="100%" class="responsive-img">
+      </div>
+    </ion-list>
+    <ion-item class="fundo btnTopo" ng-show="more == false">
+      <button class="button button-assertive col col-50 col-offset-25" ng-click="scrollTop()">Voltar ao Topo</button>
+    </ion-item>
+
+    <ion-infinite-scroll
+      on-infinite="loadMore()"
+      ng-if="more"
+      distance="5%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>
+
+
+
+

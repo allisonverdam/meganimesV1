@@ -1,0 +1,29 @@
+<ion-view title="Guia da Semana" class="fundo">
+  <ion-nav-bar class="bar-dark" nav-view-direction="forward">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <i ng-class="badgeCount > 0 ? 'badge badge-assertive' : 'visibility'" style="position: relative;top: 5px;left: -16px;">
+          {{badgeCount}}</i>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content>
+
+    <ion-list>
+      <div ng-repeat="diaSemana in semana">
+        <ion-item class="item-light"
+                  ng-click="toggleGroup(diaSemana)"
+                  ng-class="{active: isGroupShown(diaSemana)}">
+          <i class="icon" ng-class="isGroupShown(diaSemana) ? 'ion-minus' : 'ion-plus'"></i>
+          {{diaSemana.name}}
+        </ion-item>
+        <ion-item class="item-accordion"
+                  ng-repeat="item in diaSemana.items"
+                  ng-show="isGroupShown(diaSemana)">
+          {{item}}
+        </ion-item>
+      </div>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,47 @@
+<ion-view hide-nav-bar="true" nav-transition="none" title="Episodio"  drag-content="false" style="background-color: #232323;">
+
+
+  <videogular vg-player-ready="controller.onPlayerReady($API)" vg-theme="controller.config.theme" style="z-index: -1">
+    <vg-controls style="top: 0;" vg-autohide="controller.config.plugins.controls.autoHide" vg-autohide-time="controller.config.plugins.controls.autoHideTime">
+    <pular-intro></pular-intro>
+    <ep-numero></ep-numero>
+    </vg-controls>
+
+    <vg-media vg-src="controller.config.sources"
+              vg-tracks="controller.config.tracks" style="z-index: 1">
+    </vg-media>
+
+    <vg-controls style="z-index: 50;" vg-autohide="controller.config.plugins.controls.autoHide" vg-autohide-time="controller.config.plugins.controls.autoHideTime">
+      <vg-play-pause-button ng-click="mudarStyle(controller.API.currentState)"></vg-play-pause-button>
+      <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+      <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+      </vg-scrub-bar>
+      <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+      <vg-volume>
+        <vg-mute-button></vg-mute-button>
+        <vg-volume-bar></vg-volume-bar>
+      </vg-volume>
+      <vg-fullscreen-button></vg-fullscreen-button>
+    </vg-controls>
+
+    <vg-next-video class="vg-next-video" ng-style="controller.API.isCompleted == true ? {'z-index' : '20'} : {'z-index' : '-1'}"></vg-next-video>
+
+    <vg-overlay-play ng-model="state" ng-click="mudarStyle(controller.API.currentState)"></vg-overlay-play>
+    <vg-buffering></vg-buffering>
+    <vg-poster vg-url='controller.config.plugins.poster' ng-style="showPoster"></vg-poster>
+  </videogular>
+  <script type='text/javascript'>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function() {
+      var gads = document.createElement('script');
+      gads.async = true; gads.type = 'text/javascript';
+      gads.src = 'http://www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+  </script>
+
+</ion-view>
+

@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "./my-release-key.keystore",
+            "storePassword": "als1809",
+            "alias": "alias_name",
+            "password" : "als1809",
+            "keystoreType": ""
+        },
+        "release": {
+	    "keystore": "./my-release-key.keystore",
+            "storePassword": "als1809",
+            "alias": "alias_name",
+            "password" : "als1809",
+            "keystoreType": ""
+        }
+    }
+}

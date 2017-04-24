@@ -1,0 +1,28 @@
+<ion-modal-view class="row" cache-view="true">
+  <ion-header-bar class="bar bar-header bar-dark">
+    <h1 class="title">Favoritos</h1>
+    <button class="button button-clear button-light pull-right" ng-click="closeModalFav()"><i class="ion-close-round"></i></button>
+  </ion-header-bar>
+  <ion-content class="center-align fundo container-fluid has-header has-footer" delegate-handle="mainScroll">
+    <ion-list class="center-align" style="margin-bottom: 5px; color: #000 !important;">
+      <div id="item_anime" class="item col col-25" ng-repeat="anime in fav"
+           ui-sref="app.anime({id: anime.id})"
+           ng-click="closeModalFav()" style="display: inline-block;overflow: visible;float: left">
+        <p class="truncate">{{anime.nome}}</p>
+        <img ng-src="{{anime.imagem}}" width="100%">
+      </div>
+    </ion-list>
+  </ion-content>
+  <div class="bar bar-footer bar-dark">
+    <h1 class="title">Mostrar para os amigos</h1>
+    <div class="pull-right">
+      <label class="toggle">
+        <input type="checkbox" ng-model="toggleFav.checked"
+               ng-change="toggleFavChange()">
+        <div class="track">
+          <div class="handle"></div>
+        </div>
+      </label>
+    </div>
+  </div>
+</ion-modal-view>

@@ -1,0 +1,33 @@
+<ion-view class="fundo"  drag-content="true" ng-init="loadFavoritos()" cache-view="false">
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <i ng-class="badgeCount > 0 ? 'badge badge-assertive' : 'visibility'" style="position: relative;top: 5px;left: -16px;">
+          {{badgeCount}}</i>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-nav-title>
+    <h1 class="title truncate" style="width: 80%;margin: 0 auto;">Favoritos de {{amigoFav.nome}}</h1>
+  </ion-nav-title>
+
+  <ion-content class="center-align container-fluid has-header" delegate-handle="mainScroll">
+
+    <div class="center-align">
+      <ion-spinner ng-hide="amigoFav.nome != null" icon="android" style="margin-top: 10px"></ion-spinner>
+    </div>
+
+    <ion-list style="margin-bottom: 5px; color: #000 !important;">
+      <div id="item_anime" class="item col col-25" ng-repeat="anime in amigoFav.favoritos"
+           ui-sref="app.anime({id: anime.id})"
+           style="display: inline-block;overflow: visible;float: left">
+        <p class="truncate">{{anime.nome}}</p>
+        <img ng-src="{{anime.imagem}}" width="100%">
+      </div>
+    </ion-list>
+    <ion-item class="center-align visibility" ng-style="noFavoritos">
+      <h1 style="color: #ff4444">Nenhum favorito.</h1>
+    </ion-item>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,33 @@
+<ion-side-menus enable-menu-with-back-views="true" ng-controller="HomeController" ng-init="init()">
+  <ion-side-menu-content>
+    <ion-nav-view name="tab-animes"> </ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-dark">
+      <h1 class="title">Menu</h1>
+    </ion-header-bar>
+    <ion-content class="has-footer">
+        <img class="col col-80 col-offset-10" menu-close ng-if="!usuario.name" ng-click="login()" ng-src="img/fb.png">
+
+        <div ng-if="usuario.name">
+          <ion-item class="item item-avatar item-icon-right">
+            <img ng-src="{{usuario.picture.data.url}}">
+            <h2>{{usuario.name}}</h2>
+            <i class="icon ion-android-exit" ng-if="usuario.name" menu-close ng-click="logout()"></i>
+          </ion-item>
+          <button class="button button-royal col col-80 col-offset-10" menu-close ng-click="openModalFav()" style="margin-top: 10px;">Favoritos</button>
+          <button class="button button-royal col col-80 col-offset-10" nav-clear menu-toggle ui-sref="app.guiadasemana" style="margin-top: 10px;">Guia da Semana</button>
+          <button class="button button-energized col col-80 col-offset-10" menu-toggle ui-sref="app.amigos" style="margin-top: 10px;">Amigos</button>
+          <div ng-if="vip.isVip == true" class="bar bar-vip bar-footer text-center col"><h1 class="title"><i class="icon ion-android-star-outline"></i> VIP <i class="icon ion-android-star-outline"></i></h1></div>
+          <button ng-show="badgeCount >= 1" class="button button-assertive col col-80 col-offset-10" menu-toggle ng-click="openNotificacoes()" style="margin-top: 10px;">Notificações</button>
+          <!-- <button menu-toggle nav-clear class="button button-assertive col col-80 col-offset-10" ng-click="openPopover()" style="margin-top: 10px;">Sobre</button> -->
+        </div>
+    </ion-content>
+    <ion-footer-bar>
+      <div class="title bar_center" ng-class="{'button': atualizar, 'button-balanced' : atualizar}" ng-click="atualizar && check()">
+        <p class="p_versao">{{versao.nome}}</p>
+      </div>
+    </ion-footer-bar>
+  </ion-side-menu>
+</ion-side-menus>

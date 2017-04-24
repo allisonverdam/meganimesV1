@@ -1,0 +1,87 @@
+<ion-view class="fundo" ng-init="init()" drag-content="true" cache-view="true">
+  <script src="http://imasdk.googleapis.com/js/sdkloader/ima3.js" type="text/javascript"></script>
+  <ion-nav-bar class="bar-dark">
+
+    <ion-nav-buttons side="right">
+      <button id="searchbar" class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()">
+      </button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <i ng-class="badgeCount > 0 ? 'badge badge-assertive' : 'visibility'" style="position: relative;top: 5px;left: -16px;">
+          {{badgeCount}}</i>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-nav-title>
+    <h1 class="title truncate" style="width: 80%;margin: 0 auto;">{{titulo}}</h1>
+    </ion-nav-title>
+
+
+  <ion-content class="has-header">
+
+    <div class="center-align">
+      <ion-spinner ng-hide="anime.imagem != null" icon="android" style="margin-top: 10px;position: absolute;left: 40%;right: 40%;"></ion-spinner>
+      <ion-spinner ng-hide="!votou" icon="android" style="margin-top: 10px; position: absolute; z-index: 5;left: 40%;right: 40%;"></ion-spinner>
+    </div>
+
+    <div class="item row row-center visibility" ng-style="visibility">
+
+      <div class="star_favorito">
+        <img ng-src="{{coracao}}" ng-click="favoritar(anime.id)">
+      </div>
+
+      <div class="col col-40">
+        <img class="col" ng-src="{{anime.imagem}}">
+        <button class="button button-dark col visibility" ng-style="visibility" ng-click="openModal()">Sinopse</button>
+      </div>
+      <div class="col conteudoAnime visibility" ng-style="visibility" style="white-space: normal;">
+
+        <strong>Nota: </strong>
+        <rating ng-click="showVotar()" ng-model="anime.classificacao" max="rating.max" style="display: inline-block"></rating>
+        <button class="button button-calm" ng-click="votar()" style="float: right;" ng-show="btnVotar" ng-hide="!btnVotar">Votar</button></br>
+        <strong>Temporadas: </strong>{{anime.temporadas}}</br>
+        <strong>Estúdio: </strong>{{anime.estudio}}</br>
+        <strong>Status: </strong>{{anime.status}}</br>
+        <strong>Generos: </strong><span ng-repeat="genero in anime.generos">{{genero.nome}}{{$last ? '.' : ', '}}</span></br>
+      </div>
+    </div>
+    <label class="item item-input item-select visibility" ng-style="visibility">
+      <div class="input-label">
+        Temporada:
+      </div>
+      <select class="col" ng-options="item for item in getNumber(anime.temporadas)" ng-model="temp" ng-change="outraTemp(anime.id, temp)">
+      </select>
+    </label>
+
+    <ion-item class="center-align ep_404" ng-if="ep404">
+      <h1 style="font-size: 20px !important;">Nenhum episódio encontrado!</h1>
+      <h4>Procure usando o número do episódio.</h4>
+    </ion-item >
+
+    <ion-list class="center-align">
+      <div collection-repeat="ep in animeTemp track by ep.id">
+        <div class="item anime_animes span_animes" style="padding: 10px 0px; text-align: left">
+          <div ng-class="pintarAssistidos(ep)">Ep: {{ep.nome.substring((ep.nome.lastIndexOf(" ")+1), frase.length())}}</div>
+
+          <a ng-click="carregarEp(anime.id, animeTemp,ep.id)"><p class="truncate" style="padding: 1px; margin-left: 5px">{{ep.nome}}</p>
+
+            <div ng-if="assistido" class="assistido">Assistido</div>
+
+          </a>
+        </div>
+      </div>
+
+    </ion-list>
+    <ion-infinite-scroll
+      on-infinite="loadMore(temp)"
+      ng-if="more && anime.imagem != null"
+      distance="10%">
+    </ion-infinite-scroll>
+    <ion-item class="fundo btnTopo" ng-show="more == false">
+      <button class="button button-assertive col col-50 col-offset-25" ng-click="scrollTop()">Voltar ao Topo</button>
+    </ion-item>
+  </ion-content>
+</ion-view>

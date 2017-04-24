@@ -1,0 +1,21 @@
+<ion-view ng-init="init()" class="fundo">
+  <ion-nav-bar class="bar-dark">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <i ng-class="badgeCount > 0 ? 'badge badge-assertive' : 'visibility'" style="position: relative;top: 5px;left: -16px;">
+          {{badgeCount}}</i>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-nav-title>
+    <h1 class="title truncate" style="width: 80%;margin: 0 auto;">Generos</h1>
+  </ion-nav-title>
+
+  <ion-content class="has-header">
+      <div collection-repeat="genero in generos" class="col col-50" style="display: inline-flex !important;"><button class="button button-azul-1" style="width: 100%;" ng-click="buscarPorGenero(genero.id)"><p class="truncate">{{genero.nome}}</p></button></div>
+    <ion-item class="center-align visibility" ng-style="noGeneros">
+      <h1 style="color: #ff4444">Erro ao carregar.</h1>
+    </ion-item>
+  </ion-content>
+</ion-view>
